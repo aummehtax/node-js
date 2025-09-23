@@ -10,7 +10,6 @@
  *    Always handle errors inside callbacks.
  */
 
-
 const fs = require('fs')
 
 fs.writeFile("hello.txt" , "kem cho", (err) => {
