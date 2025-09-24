@@ -1,0 +1,46 @@
+//
+📌 Node.js Modules Notes
+
+1. Module = A module in Node.js is a file that contains reusable logic (functions, classes, variables, etc.).
+You can import or export these modules using require() or import.
+
+2. Types of Modules:
+   - Core Modules (built-in, e.g., fs, http, path, os)
+   - Local Modules (created by you, custom files)
+   - Third-Party Modules (installed via npm, e.g., express, lodash)
+
+3. Importing modules:
+   - CommonJS (default in Node.js): const fs = require('fs');
+   - ES Modules (ESM): import fs from 'fs';  (need "type":"module" in package.json)
+
+4. Exporting modules:
+   - module.exports = functionName;   // single export
+   - module.exports = { func1, func2 };  // multiple exports
+   - In ESM: export default ... / export { ... }
+
+5. Core Module Examples:
+   - fs  → File System operations
+   - path → Work with file & directory paths
+   - http → Create web servers
+   - os  → System info
+   - events → Event handling
+   - url URL parsing
+
+6. Custom Module Example:
+   - In add.js → module.exports = (a, b) => a + b;
+   - In app.js → const add = require('./add'); console.log(add(2,3));
+
+7. Third-Party Modules:
+   - Installed via npm (npm i module_name)
+   - Example: const express = require('express');
+
+🔑 Summary: 
+Modules make Node.js applications modular, reusable, and maintainable.
+
+
+//
+📦 node_modules Folder in Node.js
+
+1. What is it?
+   - A directory automatically created when you install dependencies using npm or yarn.
+   - It stores all the code (packages) that your project depends on.

@@ -1,0 +1,37 @@
+/* 
+📌 Non-Blocking I/O in Node.js
+
+1. I/O = Input/Output operations
+   - Examples: reading files, writing to DB, making API calls, network requests.
+
+2. Blocking I/O:
+   - The program waits until an operation finishes before moving to the next task.
+   - Example: If file reading takes 5s → the whole program "pauses" for 5s.
+
+3. Non-Blocking I/O:
+   - Node.js does NOT wait for an operation to finish.
+   - Instead, it starts the operation → moves on to the next task → 
+     when the operation finishes, a callback/promise handles the result.
+   - This is possible because Node.js is built on an event-driven architecture.
+
+4. Why is this good?
+   - Handles thousands of requests at the same time without "getting stuck."
+   - Makes Node.js very fast and scalable, especially for I/O-heavy apps.
+
+5. Example:
+   // Blocking
+   const data = fs.readFileSync("file.txt", "utf8"); 
+   console.log(data);  // waits until file is read
+
+   // Non-Blocking
+   fs.readFile("file.txt", "utf8", (err, data) => {
+     if (err) throw err;
+     console.log(data);  // executed when file is ready
+   });
+   console.log("I don’t wait for file reading!"); 
+
+🔑 Summary:
+Non-blocking I/O = Node.js never stops execution while waiting for 
+slow operations (like file, DB, or network). It uses callbacks, promises, 
+or async/await to handle results later.
+*/

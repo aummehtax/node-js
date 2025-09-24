@@ -1,0 +1,49 @@
+/* 
+📌 Dependencies vs DevDependencies in Node.js
+
+1. Dependencies ("dependencies")
+   - Found in: package.json → "dependencies"
+   - These are packages required for the app to run in production.
+   - Example: express, mongoose, react
+   - Installed using: npm install <package>
+   - Command: npm i express
+
+   Example in package.json:
+   "dependencies": {
+     "express": "^4.18.2"
+   }
+
+2. DevDependencies ("devDependencies")
+   - Found in: package.json → "devDependencies"
+   - These are packages used only during development (not needed in production).
+   - Examples: nodemon, eslint, jest, webpack
+   - Installed using: npm install <package> --save-dev
+     (short form: npm i <package> -D)
+
+   Example in package.json:
+   "devDependencies": {
+     "nodemon": "^3.0.1"
+   }
+
+3. Difference in Usage:
+   - dependencies → required for your app to actually work.
+   - devDependencies → only help you while coding, testing, or building.
+
+4. Why separate them?
+   - Keeps production environment light (no unnecessary tools).
+   - Easier for other developers to know what is required to run vs develop.
+
+5. Install all together:
+   - `npm install` installs both dependencies + devDependencies.
+   - In production (with NODE_ENV=production), only dependencies are installed.
+
+🔑 Summary:
+- dependencies → essential for app runtime.
+- devDependencies → tools/helpers for development only.
+*/
+
+
+
+
+
+

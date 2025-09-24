@@ -1,0 +1,42 @@
+/*
+📌 npm Scripts in Node.js
+
+1. Location:
+   - Scripts are defined inside package.json under "scripts".
+   - Example:
+     {
+       "scripts": {
+         "start": "node index.js",
+         "dev": "nodemon index.js",
+         "test": "echo \"Running tests...\""
+       }
+     }
+
+2. Run Command:
+   - Syntax → npm run <scriptName>
+   - Example → npm run dev
+
+3. Default Scripts:
+   - "start": npm start   (no need to type 'npm run start')
+   - "test":  npm test    (no need to type 'npm run test')
+
+4. Default PATH:
+   - When running npm scripts, node_modules/.bin is added to PATH automatically.
+   - This means you can use local binaries (like nodemon, eslint, webpack) 
+     without installing them globally or typing full paths.
+   - Example:
+     "dev": "nodemon index.js"   // nodemon is picked from node_modules/.bin
+
+5. Why Useful?
+   - Shortcuts for commands.
+   - Keeps project setup consistent across machines.
+   - Lets you chain multiple commands (with && or &&).
+
+6. Example Usage:
+   npm start        → runs "node index.js"
+   npm run dev      → runs "nodemon index.js"
+   npm test         → runs your test command
+*/
+
+
+-> see custom scripts i made in package.json file called chacha
