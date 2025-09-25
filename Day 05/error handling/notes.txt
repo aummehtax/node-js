@@ -1,0 +1,12 @@
+/*
+📌 Error Handling in Express (Short)
+
+1. Use error-handling middleware: (err, req, res, next)
+2. Inside route, call next(error) if something goes wrong.
+3. Error middleware catches it and sends response:
+   - Logs error
+   - res.status(500).send("Oops!")
+
+Flow:
+Route → next(error) → Error Middleware → Client Response
+*/

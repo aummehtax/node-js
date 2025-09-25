@@ -1,0 +1,28 @@
+/*
+📌 Middleware in Express.js
+
+1. What is Middleware?
+   - Middleware is like a "helper function" that sits between the request (from user) and the response (from server).
+
+2. How it works:
+   - Request comes in → Middleware runs → Then goes to next middleware/route → Finally sends response.
+
+3. Uses of Middleware:
+   - Logging requests (who visited, when).
+   - Checking authentication (is user logged in?).
+   - Parsing data (like JSON, form inputs).
+   - Handling errors.
+
+4. Key point:
+   - Middleware always has access to (req, res, next).
+   - `next()` → passes control to the next function in the chain.
+
+✅ In short: Middleware = Functions that process requests before sending the final response.
+*/
+
+-> in simple word (diagram)
+
+Client Request --> Middleware (if any) --> Route Handler --> Response
+
+
+

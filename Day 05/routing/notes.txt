@@ -1,0 +1,20 @@
+/*
+📌 Routing in Express.js
+
+1. What is Routing?
+   - Routing means deciding how an app responds to different URLs (paths) and HTTP methods (GET, POST, etc.).
+
+2. Example in real life:
+   - Like directions in Google Maps → “If user goes to /home → show homepage”.
+   - Different routes = different responses.
+
+3. In Express:
+   - app.get('/home', ...) → Runs when user visits /home with GET request.
+   - app.post('/login', ...) → Runs when user submits form data to /login.
+
+4. Why useful?
+   - Organizes your server to handle multiple pages/endpoints.
+   - Makes backend code cleaner and structured.
+
+✅ In short: Routing = "URL + HTTP method → What server should do".
+*/

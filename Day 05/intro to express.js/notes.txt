@@ -1,0 +1,23 @@
+/*
+📌 Express.js Notes
+
+1. What is Express.js?
+   - A fast, minimal, and flexible Node.js web framework.
+   - Helps in building web applications and APIs easily.
+   - Handles server-side logic like routing, requests, and responses. ( manage everything from receiving the request and giving the response )
+
+2. Why use Express?
+   - Simplifies Node.js server code (no need to write long http module code).
+   - Provides built-in support for routing and middleware.
+   - Popular, widely used, and has huge community support.
+
+3. Introduction:
+   - Built on top of Node.js.
+   - Used to create RESTful APIs and web apps.
+   - Works with middleware (functions that handle requests/responses).
+   - Example use cases: websites, backend APIs, authentication, CRUD apps.
+*/
+
+setting up a basic express applications : - 
+
+- npm install express

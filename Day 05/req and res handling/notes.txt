@@ -1,0 +1,24 @@
+📌 req & res in Express
+
+-> in simple words:-
+
+
+frontend ---> backend ---> frontend
+
+
+- req (request): what the client sends
+   • URL (/home, /profile)
+   • Query params (?id=1)
+   • Body data (form, JSON)
+   • Headers (auth, info)
+
+- res (response): what the server sends back
+   • Text, HTML, JSON, files
+   • Status codes (200, 404, 500)
+
+- Example:
+  app.get("/", (req, res) => {
+      console.log(req.url);  // info from client
+      res.send("Hello!");    // send response back
+  });
+
