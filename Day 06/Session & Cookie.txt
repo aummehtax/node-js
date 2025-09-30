@@ -1,0 +1,54 @@
+/* ===============================
+   🍪 Cookies
+   ===============================
+
+- Small pieces of data stored on the client’s browser (key-value pairs).
+- Purpose: To remember info across multiple requests.
+- Stored on: Client-side (browser).
+- Sent automatically with each HTTP request to the same domain.
+
+✅ Characteristics:
+1. Client-side storage.
+2. Automatic transmission with requests.
+3. Size limit ~4KB per cookie, ~20-50 cookies per domain.
+4. Lifetime:
+   - Session cookies → deleted when browser closes.
+   - Persistent cookies → expire at a given date.
+5. Security:
+   - Accessible by JS unless `HttpOnly`.
+   - Vulnerable to XSS/CSRF if not secured.
+
+📌 Example (HTTP Header):
+Set-Cookie: userId=12345; Expires=Wed, 09 Oct 2025 23:59:59 GMT; HttpOnly; Secure
+*/
+
+/* ===============================
+   🔑 Sessions
+   ===============================
+
+- Server-side way of storing user-specific data.
+- Client only stores a Session ID (usually inside a cookie).
+- Purpose: Authentication, shopping carts, preferences, etc.
+
+✅ Characteristics:
+1. Server-side storage (more secure).
+2. Identified by Session ID (stored in cookie, URL, or headers).
+3. No strict size limit (depends on server memory).
+4. Lifetime: Until logout, browser close, or timeout (e.g., 30 mins).
+5. Security: Safer than cookies since actual data is on server,
+   but Session ID theft = Session Hijacking.
+
+*/
+
+/* ===============================
+   🔄 Cookies vs Sessions
+   ===============================
+
+- Cookies → client-side
+- Sessions → server-side
+- Sessions often rely on cookies (store Session ID).
+- Typical flow:
+   1. User logs in → Server creates session → assigns Session ID.
+   2. Session ID stored in a cookie.
+   3. On next request → Browser sends Session ID cookie → Server finds the session.
+*/

@@ -1,0 +1,74 @@
+/* ===============================
+   📌 express.json()
+   ===============================
+
+- Built-in middleware in Express (since v4.16.0).
+- Purpose: Parse incoming requests with JSON payloads.
+- Adds the parsed data to `req.body`.
+
+✅ When to use:
+- When client sends data as JSON (e.g., API requests).
+- Example:
+   fetch("/api", {
+     method: "POST",
+     headers: { "Content-Type": "application/json" },
+     body: JSON.stringify({ name: "Aum", age: 20 })
+   })
+
+   // Server:
+   app.use(express.json());
+   app.post("/api", (req, res) => {
+     console.log(req.body); // { name: "Aum", age: 20 }
+   });
+
+*/
+
+/* ===============================
+   📌 express.urlencoded()
+   ===============================
+
+- Built-in middleware in Express.
+- Purpose: Parse incoming requests with URL-encoded payloads 
+  (data from HTML forms).
+- Adds parsed data to `req.body`.
+
+✅ When to use:
+- When client sends data using forms with 
+  `Content-Type: application/x-www-form-urlencoded`.
+
+- Example:
+   <form method="POST" action="/submit">
+     <input name="username" value="Aum"/>
+     <input name="age" value="20"/>
+   </form>
+
+   // Server:
+   app.use(express.urlencoded({ extended: true }));
+   app.post("/submit", (req, res) => {
+     console.log(req.body); // { username: "Aum", age: "20" }
+   });
+
+✅ Options:
+- `extended: false`
+   Uses querystring library → simple objects only.
+- `extended: true`
+   Uses qs library → supports nested objects (e.g., user[name]=Aum).
+
+*/
+
+/* ===============================
+   🔄 express.json() vs express.urlencoded()
+   ===============================
+
+- express.json()
+   → Parse JSON payloads.
+   → Used in APIs / fetch / Axios requests.
+
+- express.urlencoded()
+   → Parse URL-encoded payloads.
+   → Used in traditional HTML form submissions.
+
+👉 Common to use BOTH in apps:
+   app.use(express.json());
+   app.use(express.urlencoded({ extended: true }));
+*/
