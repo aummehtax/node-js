@@ -1,0 +1,63 @@
+-> work to do : -
+
+* setting up parsers for form
+* setting up ejs for ejs pages
+* setting up public static files
+
+dynamic routing 
+  dynamic routing 
+  how to get data coming from frontend to backend route
+
+
+// ====================== EXPRESS DYNAMIC ROUTING ======================
+
+// 1. Dynamic Routing means creating routes with variable parts (parameters).
+//    Example: "/user/:id" -> ":id" is a route parameter.
+
+// 2. Route parameters are defined with a colon (:) in the route path.
+//    Example: app.get("/profile/:username", (req, res) => {...});
+
+// 3. Access dynamic values with req.params
+//    Example: req.params.username will give you the value passed in URL.
+
+// 4. You can use multiple dynamic params
+//    Example: "/author/:username/:age" 
+//             -> req.params.username , req.params.age
+
+// 5. Route parameters are always strings (convert if needed).
+//    Example: Number(req.params.age) to treat age as a number.
+
+// ====================================================================
+
+// ============================ EJS NOTES =============================
+
+// 1. EJS (Embedded JavaScript) is a template engine for rendering dynamic HTML.
+
+// 2. You must set view engine first:
+//    app.set("view engine", "ejs");
+
+// 3. By default, EJS files are stored inside a "views" folder in your project.
+//    Example structure:
+//       - views/
+//         └── index.ejs
+//         └── profile.ejs
+
+// 4. To render an EJS page:
+//    res.render("index") 
+//    -> looks for "views/index.ejs"
+
+// 5. To pass data from Express to EJS:
+//    res.render("profile", { username: "Aum", age: 20 });
+
+// 6. Inside EJS, use <%= %> to display dynamic data:
+//    <h1>Hello <%= username %>, Age: <%= age %></h1>
+
+// 7. Use <% %> for logic (loops, if conditions):
+//    <% if(age > 18) { %>
+//        <p>You are an adult.</p>
+//    <% } %>
+
+// 8. You can include partials (like header/footer) for reusability.
+//    Example: <%- include("partials/header") %>
+
+// ====================================================================
