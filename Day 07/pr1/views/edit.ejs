@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/stylesheets/output.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="w-full min-h-screen bg-zinc-900 text-white p-3 flex flex-col gap-2">
+
+    <a href="/" class="text-blue-400">Back to homepage</a>
+
+    <form action="/edit" method="post" class="flex flex-col gap-4">
+        <input name="previous" type="text" placeholder="Previous" class="bg-zinc-700 text-zinc-400  outline-0 rounded-2xl p-2 w-1/4" value="<%= prevName%>">
+        <input name="new" type="text" placeholder="New" class="bg-zinc-700  outline-0 rounded-2xl p-2 w-1/4">
+        <button type="submit" class="p-2 rounded-2xl max-w-35 cursor-pointer active:scale-[0.9] duration-[0.2s] bg-yellow-600">Update name</button>
+    </form>
+   
+
+</div>
+
+</body>
+</html>
