@@ -10,9 +10,9 @@ app.get("/" , (req,res) => {
 
 app.get("/create" , async(req,res) => {
    let createUser = await userModel.create({
-        name: "harshita",
-        userName: "harshita02",
-        email: "harshita53@gmail.com"
+        name: "binod",
+        userName: "binod006",
+        email: "binod53@gmail.com"
     })
 
     res.send(createUser)
@@ -24,12 +24,12 @@ app.get("/read" , async(req,res) => {
 })
 
 app.get("/update" , async(req,res) => {
-   let updateUser = await userModel.findOneAndUpdate({userName:"harshita02"} , {userName:"harshita9898" , name:"harshita ben" , email:"harshita222@gmail.com"} , {new:true}) //new true se updated user milega
+   let updateUser = await userModel.findOneAndUpdate({userName:"binod006"} , {name:"binod009"} , {new:true}) //new true se updated user milega
     res.send(updateUser) 
 })
 
 app.get("/delete" , async(req,res) => {
-   let deleteUser = await userModel.findOneAndDelete({userName:"aum0099"}) 
+   let deleteUser = await userModel.findOneAndDelete({userName:"binod006"}) 
     res.send(deleteUser) 
 })
 

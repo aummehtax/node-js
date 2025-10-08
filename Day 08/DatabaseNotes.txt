@@ -174,10 +174,10 @@ User → Frontend (React) → Application Server (Express/Node.js) → Database 
 # 🗄️ MongoDB — Start Server & Use GUI (Compass)
 
 # 1️⃣ Start MongoDB server
-sudo systemctl start mongod
+sudo systemctl start mongod.service
 
 # 2️⃣ (Optional) Check if server is running
-sudo systemctl status mongod
+sudo systemctl status mongod.service
 # Look for "active (running)"
 
 # 3️⃣ Open MongoDB Compass (GUI)
