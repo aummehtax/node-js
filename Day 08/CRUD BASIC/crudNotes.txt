@@ -1,0 +1,40 @@
+// 🗄️ MongoDB CRUD (Create, Read, Update, Delete) Notes
+
+/*
+🔹 CREATE → userModel.create()
+   - Inserts a new document (record) into the collection.
+   - Returns the created document.
+*/
+await userModel.create({
+  name: "harshita",
+  userName: "harshita02",
+  email: "harshita53@gmail.com"
+});
+
+
+/*
+🔹 READ → userModel.find()
+   - Fetches all documents from the collection.
+   - Returns an array of all user objects.
+*/
+await userModel.find();
+
+
+/*
+🔹 UPDATE → userModel.findOneAndUpdate(filter, updateData, options)
+   - Finds the first document that matches the filter and updates it.
+   - { new: true } → returns the updated document instead of old one.
+*/
+await userModel.findOneAndUpdate(
+  { userName: "aum01" },
+  { userName: "aum0099" },
+  { new: true }
+);
+
+
+/*
+🔹 DELETE → userModel.findOneAndDelete(filter)
+   - Finds and deletes the first document that matches the filter.
+   - Returns the deleted document.
+*/
+await userModel.findOneAndDelete({ userName: "aum0099" });

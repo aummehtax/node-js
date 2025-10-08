@@ -1,0 +1,192 @@
+/*
+(for simple understanding) :-
+
+Database -> Collection -> Document
+---------------------------------------------
+---------------------------------------------
+
+CODE                DATABASE
+---------------------------------------------
+mongoose.connect -> database create
+model create -> collection
+CREATE code -> document
+*/
+
+
+/* 
+====================================================
+📘 DATABASE NOTES — MONGODB BASICS (COMMENT FORMAT)
+====================================================
+
+🧩 1. DATA STORAGE
+------------------
+- Data storage refers to how information (like user details, products, messages) 
+  is saved and managed for use by applications.
+- Data can be stored in two main ways:
+  1️⃣ **File System** → Text, CSV, JSON files etc.
+  2️⃣ **Databases** → Structured storage for easy access, queries, and management.
+
+💡 Why use a Database instead of plain files?
+- Easier to query and filter data
+- Faster data access
+- Handles large datasets efficiently
+- Supports concurrent access (multiple users)
+- Provides data integrity and security
+
+---------------------------------------------------
+💾 2. TYPES OF DATABASES
+---------------------------------------------------
+
+1️⃣ **Relational Databases (SQL)**
+- Data is stored in tables (rows and columns)
+- Predefined schema (fixed structure)
+- Uses SQL (Structured Query Language)
+- Examples: MySQL, PostgreSQL, Oracle
+
+2️⃣ **Non-Relational Databases (NoSQL)**
+- Data is stored in flexible formats like JSON/BSON
+- Schema-less (structure can vary for each record)
+- Designed for scalability and high performance
+- Examples: MongoDB, Firebase, Cassandra
+
+💡 SQL vs NoSQL:
+| Feature         | SQL (Relational)     | NoSQL (Non-Relational)  |
+|-----------------|----------------------|--------------------------|
+| Structure       | Tables (rows/cols)   | Collections (documents)  |
+| Schema          | Fixed                | Flexible                 |
+| Joins           | Supported            | Limited                  |
+| Scalability     | Vertical             | Horizontal               |
+| Format          | Tabular              | JSON-like                |
+
+---------------------------------------------------
+🍃 3. WHAT IS MONGODB?
+---------------------------------------------------
+- MongoDB is a **NoSQL, document-based database**.
+- Stores data in JSON-like format called **BSON**.
+- Each record (document) can have a different structure.
+- Built for speed, scalability, and flexibility.
+
+---------------------------------------------------
+🎯 4. WHY MONGODB?
+---------------------------------------------------
+✅ Schema-less → Easy to modify data structure
+✅ JSON format → Developer friendly (fits perfectly with JavaScript)
+✅ Scalable → Handles large-scale applications easily
+✅ Fast performance → No complex joins
+✅ Great with Node.js (used in MERN stack)
+
+---------------------------------------------------
+🧱 5. TERMINOLOGY
+---------------------------------------------------
+
+🔹 **Database**
+→ A container for collections (like a folder).
+
+🔹 **Collection**
+→ A group of related documents (like a table in SQL).
+
+🔹 **Document**
+→ A single record in JSON/BSON format.
+Example:
+{
+  name: "Aum",
+  age: 20,
+  city: "Mumbai"
+}
+
+🔹 **Schema (in Mongoose)**
+→ A structure/blueprint that defines the shape of a document.
+Example:
+const userSchema = new mongoose.Schema({
+  name: String,
+  age: Number
+})
+
+🔹 **Model**
+→ A constructor based on the schema used to create, read, update, or delete documents in a collection.
+Example:
+const User = mongoose.model("User", userSchema)
+
+🔹 **Key / Field**
+→ The property name inside a document.
+Example:
+{ name: "Aum" } → here "name" is a key, and "Aum" is its value.
+
+---------------------------------------------------
+🖥️ 6. APPLICATION SERVER & DATABASE SERVER
+---------------------------------------------------
+
+📍 **Application Server**
+- Handles the application logic (backend code).
+- Communicates with the database to fetch, store, or process data.
+- Example: Node.js with Express
+
+📍 **Database Server**
+- Stores and manages the actual data.
+- Responds to queries from the application server.
+- Example: MongoDB server (running locally or in cloud via MongoDB Atlas)
+
+💡 Example Flow:
+User → Frontend (React) → Application Server (Express/Node.js) → Database Server (MongoDB)
+
+---------------------------------------------------
+✅ SUMMARY
+---------------------------------------------------
+- MongoDB stores data in flexible, JSON-like documents.
+- It is a NoSQL database → highly scalable and fast.
+- Key terms: Database, Collection, Document, Schema, Model, Key.
+- Application server runs your logic, while database server stores your data.
+====================================================
+*/
+
+
+
+// 🧩 MongoDB Notes
+
+// 1️⃣ mongodb-org-server
+// → The main MongoDB Database Server
+// → Handles data storage, indexing, and queries
+// → Runs as a background service (mongod)
+// → You must start this before using mongosh or Compass
+
+// 2️⃣ mongodb-mongosh
+// → The MongoDB Shell (CLI Interface)
+// → Used to interact with MongoDB using commands in terminal
+// → Example: show dbs, use myDB, db.users.find()
+// → Replaces the old 'mongo' shell
+
+// 3️⃣ mongodb-compass
+// → MongoDB GUI (Graphical Interface)
+// → Used to visually manage databases, collections, and documents
+// → Helpful for beginners and data visualization
+// → Connects to the same MongoDB server as mongosh
+
+// ⚙️ How they work together
+// mongodb-org-server  → runs the actual database
+// mongodb-mongosh     → CLI interface for developers
+// mongodb-compass     → GUI interface for visual management
+
+// 🧭 Common connection
+// mongosh or Compass connect to: mongodb://localhost:27017
+
+
+
+# 🗄️ MongoDB — Start Server & Use GUI (Compass)
+
+# 1️⃣ Start MongoDB server
+sudo systemctl start mongod
+
+# 2️⃣ (Optional) Check if server is running
+sudo systemctl status mongod
+# Look for "active (running)"
+
+# 3️⃣ Open MongoDB Compass (GUI)
+# In Compass connection URL:
+mongodb://localhost:27017
+# Then click "Connect"
+
+# 4️⃣ Stop server after work (optional)
+sudo systemctl stop mongod
+
+# ⚙️ Optional: Auto-start MongoDB on system boot
+sudo systemctl enable mongod
