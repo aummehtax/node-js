@@ -1,3 +1,20 @@
+// SSR:(Server-Side Rendering):
+
+// User sends request
+// Server fetches data from database
+// Server generates HTML with that data
+// Sends complete HTML to browser ✅
+
+// CSR:(Client-Side Rendering)
+
+// User sends request
+// Server sends basic HTML (mostly empty) + JavaScript
+// Browser runs JavaScript
+// JavaScript makes another request to server to fetch data
+// Server sends data (usually JSON)
+// JavaScript builds the page with that data ✅
+
+
 const express = require('express')
 const path = require('path')
 const userModel = require('./models/user')
