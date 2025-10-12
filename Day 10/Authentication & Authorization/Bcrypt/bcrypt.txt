@@ -1,0 +1,44 @@
+// BCRYPT - Simple Notes
+// =====================
+
+// WHAT IS BCRYPT?
+// - A library for hashing passwords
+// - Makes passwords secure and unreadable
+// - One-way process (cannot reverse/decrypt)
+
+// WHY USE BCRYPT?
+// - Never store plain passwords in database
+// - Even if database is hacked, passwords are safe
+// - bcrypt adds "salt" (random string) for extra security
+
+// HOW IT WORKS:
+// =============
+// 1. User enters password: "mypassword123"
+// 2. bcrypt hashes it: "$2b$10$abc...xyz" (long random string)
+// 3. Store hash in database (NOT original password)
+// 4. When user logs in, compare entered password with stored hash
+// 5. If match → Login success, If no match → Login fail
+
+// TWO MAIN FUNCTIONS:
+// ===================
+// 1. hash() - Create hash from password
+// 2. compare() - Check if password matches hash
+
+// SALT ROUNDS:
+// - Number that decides how secure (and slow) hashing is
+// - Higher number = more secure but slower
+// - Common values: 10, 12
+// - bcrypt.hash("password", 10) → 10 rounds
+
+// IMPORTANT POINTS:
+// =================
+// ✅ Hashing, NOT encryption
+// ✅ Cannot decrypt hash back to password
+// ✅ Same password creates different hash each time (due to salt)
+// ✅ Use compare() to verify passwords, not decrypt
+// ✅ Store hash in database, never plain password
+
+// WHEN TO USE:
+// - User registration (hash password before saving)
+// - User login (compare entered password with stored hash)
+// - Changing password (hash new password)

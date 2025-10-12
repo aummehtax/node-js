@@ -1,0 +1,19 @@
+// AUTHENTICATION - "Who are you?"
+// - Process of verifying the identity of a user
+// - Proves you are who you claim to be
+// - Example: Logging in with username and password
+// - Like showing your ID card at the entrance
+
+// AUTHORIZATION - "What can you do?"
+// - Process of determining what an authenticated user can access
+// - Defines permissions and access rights
+// - Example: Admin can delete users, regular user cannot
+// - Like having different key cards for different rooms after entering the building
+
+// Simple flow:
+// 1. Authentication happens first (login)
+// 2. Authorization happens after (checking permissions)
+
+// Real-world example:
+// Authentication: You log into Facebook with email/password
+// Authorization: You can edit YOUR posts, but not other people's posts

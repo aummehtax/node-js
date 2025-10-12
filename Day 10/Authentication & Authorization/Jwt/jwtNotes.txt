@@ -1,0 +1,80 @@
+// JWT TOKEN - Simple Notes
+// ========================
+
+// WHAT IS JWT?
+// - JSON Web Token
+// - Used for authentication
+// - Stores user data in encrypted format
+// - Sent between client and server
+
+// WHY USE JWT?
+// - Keep user logged in
+// - Stateless authentication (no need to store sessions in database)
+// - Secure way to transfer data
+// - Server can verify token without database query
+
+// HOW IT WORKS:
+// =============
+// 1. User logs in with username/password
+// 2. Server creates JWT token with user data
+// 3. Server sends token to browser (in cookie or response)
+// 4. Browser stores token
+// 5. Browser sends token with every request
+// 6. Server verifies token and gets user data
+// 7. If valid → Allow access, If invalid → Reject
+
+// JWT STRUCTURE:
+// ==============
+// Token has 3 parts separated by dots:
+// Header.Payload.Signature
+// eyJhbGc...(header).eyJlbWF...(payload).SflKxwR...(signature)
+
+// Part 1: Header - Token type and algorithm
+// Part 2: Payload - Your data (email, id, name)
+// Part 3: Signature - Encrypted with secret key (for security)
+
+// TWO MAIN FUNCTIONS:
+// ===================
+// 1. jwt.sign() - Create token with data
+//    jwt.sign({email: "user@mail.com"}, "secretkey")
+
+// 2. jwt.verify() - Verify and decode token
+//    jwt.verify(token, "secretkey")
+
+// SECRET KEY:
+// - Used to encrypt and decrypt token
+// - Must be same for sign() and verify()
+// - Keep it secret! Don't share or commit to git
+// - If someone has your secret, they can create fake tokens
+
+// TOKEN EXPIRY:
+// - Tokens can expire after certain time
+// - Example: expiresIn: "1h", "7d", "30m"
+// - After expiry, user needs to login again
+
+// WHERE TO STORE TOKEN:
+// =====================
+// 1. Cookie (httpOnly) - Most secure ✅
+// 2. localStorage - Easy but less secure
+// 3. sessionStorage - Deleted when browser closes
+
+// JWT vs SESSION:
+// ===============
+// SESSION:
+// - Stored on server (database/memory)
+// - Server needs to check database every request
+// - Takes more server resources
+
+// JWT:
+// - Stored on client (browser)
+// - Server just verifies signature (no database check)
+// - Faster and scalable
+
+// IMPORTANT POINTS:
+// =================
+// ✅ JWT is NOT encryption (anyone can decode and see data)
+// ✅ Don't store sensitive data (passwords, credit cards)
+// ✅ Only store user ID, email, role etc.
+// ✅ Signature prevents tampering (if data changed, verify fails)
+// ✅ Always use HTTPS in production
+// ✅ Add expiry time for security

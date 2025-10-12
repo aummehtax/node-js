@@ -1,0 +1,42 @@
+// WHERE COOKIES ARE MOSTLY USED?
+// ================================
+
+// 1. AUTHENTICATION & SESSION MANAGEMENT (Most Common)
+// - Storing login tokens/session IDs
+// - Keeping user logged in across pages
+// - Example: After login, server sends token in cookie
+//   Server response: Set-Cookie: token=abc123
+//   Browser automatically sends this cookie with every request
+
+// 2. USER PREFERENCES
+// - Theme (dark/light mode)
+// - Language selection
+// - Font size settings
+// Example: Set-Cookie: theme=dark
+
+// 3. SHOPPING CART
+// - E-commerce sites store cart items
+// - Example: Set-Cookie: cart=item1,item2,item3
+
+// 4. TRACKING & ANALYTICS
+// - Google Analytics
+// - Tracking user behavior
+// - Advertising preferences
+// Example: Set-Cookie: _ga=tracking_id
+
+// 5. REMEMBER ME FUNCTIONALITY
+// - Keep username saved
+// - Auto-fill login forms
+// Example: Set-Cookie: remember_user=john@email.com
+
+
+// MOST IMPORTANT USE: Authentication Sessions
+// ============================================
+// When you login → Server creates cookie → Browser stores it
+// → Browser sends cookie automatically with every request
+// → Server knows you're logged in
+
+// Cookie example:
+// Set-Cookie: sessionId=xyz789; HttpOnly; Secure; Path=/
+
+In short: Cookies are mostly used for keeping you logged in (authentication). The browser automatically sends cookies with every request, so the server knows who you are! 🍪
