@@ -1,7 +1,6 @@
-# node-js
+# node-js, mongoDb, express
 
-- All daily tasks of Node.js will be pushed here
+- All daily tasks will be pushed here
 - Includes concepts and examples
-- Includes modules and middleware
 - Includes mini projects
 - Updated daily
