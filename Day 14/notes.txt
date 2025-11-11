@@ -1,0 +1,23 @@
+// 🧩 Proxy
+// A proxy acts as a middle layer between frontend and backend.
+// It helps avoid CORS errors and simplifies API calls during development.
+// In Vite, set proxy in vite.config.js like this:
+/*
+export default {
+  server: {
+    proxy: {
+      "/api": "http://localhost:8080"
+    }
+  }
+}
+*/
+// Now you can use axios.get("/api/jokes") instead of full backend URL.
+
+// 🔐 CORS (Cross-Origin Resource Sharing)
+// CORS controls which domains can access your backend.
+// Browsers block requests from different origins for security reasons.
+// To allow it, use middleware in Express:
+// const cors = require("cors");
+// app.use(cors());
+// You can also specify allowed origins:
+// app.use(cors({ origin: "http://localhost:5173" }));
