@@ -7,6 +7,10 @@ const userSchema = mongoose.Schema({
     name : String,
     age : Number,
     email : String,
+    profilepic : {
+        type : String,
+        default : "default.webp"
+    },
     password : String,
     posts : [{ type : mongoose.Schema.Types.ObjectId, ref : "post"}]
 })

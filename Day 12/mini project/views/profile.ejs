@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/output.css" rel="stylesheet">
+  <link href="/stylesheets/output.css" rel="stylesheet">
 </head>
 <body>
     
     <div class="w-full text-white min-h-screen bg-zinc-900 p-4">
       <div class="text-2xl flex justify-between tracking-tight mt-4 mb-1">
-         <div>
-          <span class="font-light">Hello</span>,
+         <div class="flex gap-3 items-center mb-4">
+          <a href="/profile/upload" class=" w-10 h-10 cursor-pointer">
+            <img class="bg-cover w-full rounded-full  h-full overflow-hidden" src="/images/uploads/<%= user.profilepic %>" alt="">
+          </a>
+          <span class="font-light">Hello,</span> 
           <%= user.name %> 👋🏻
          </div>
          <a href="/logout" class="bg-red-500 flex justify-center items-center rounded-2xl px-3 py-1 text-[16px]">Logout</a>
