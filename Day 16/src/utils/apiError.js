@@ -15,6 +15,8 @@ class apiError extends Error{
     }
 }
 
+export {apiError}
+
 // 📘 apiError class:
 // This custom class extends the built-in Error class to create more useful error messages.
 // It helps us handle errors in a clean and structured way in backend.

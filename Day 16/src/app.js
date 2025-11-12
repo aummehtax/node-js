@@ -14,4 +14,10 @@ app.use(express.urlencoded({extended:true})) //you can set limit in this also
 app.use(express.static("public"))
 app.use(cookieParser())
 
+//routes import
+import userRouter from "./routes/user.routes.js"
+
+//routes declaration
+app.use("/api/v1/users", userRouter)  //look like this http://localhost:8000/users/register
+
 export {app}

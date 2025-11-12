@@ -7,6 +7,8 @@ class apiResponse{
     }
 }
 
+export {apiResponse}
+
 // 📘 apiResponse class:
 // This class is used to send a clean and consistent response from the backend to the frontend.
 //
