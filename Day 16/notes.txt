@@ -1,0 +1,74 @@
+/*  
+📘 WHAT IS CONFIGURATION SETTING?
+
+Configuration settings in backend are the environment-specific values 
+(like database URLs, API keys, ports, and secrets) that control how 
+your server runs — stored separately from code (usually in .env or 
+config files) so they can be easily changed without modifying the 
+application logic.
+
+📝 Note: These setup steps can vary from project to project.
+*/
+
+/*  
+🧠 BACKEND ROADMAP (Setup Flow)
+
+1️⃣ Initialize Project
+   → npm init -y
+   → install express, dotenv, mongoose, cors, etc.
+
+2️⃣ Create Folder Structure
+   📂 src/
+      ├── app.js
+      ├── index.js
+      ├── db/
+      │    └── database.js
+      ├── models/
+      ├── routes/
+      ├── controllers/
+      ├── middlewares/
+      ├── utils/
+      └── config/
+
+3️⃣ Configure Environment Variables
+   → create .env file
+      PORT=8080
+      MONGODB_URI=...
+      CLOUDINARY_API_KEY=...
+      JWT_SECRET=...
+
+4️⃣ Connect MongoDB
+   → db/database.js
+   → use mongoose.connect()
+
+5️⃣ Setup Express App
+   → app.js
+   → import express, cors, middlewares
+   → use app.use(express.json())
+
+6️⃣ Define Routes
+   → routes/user.routes.js
+   → app.use("/api/v1/users", userRoutes)
+
+7️⃣ Create Controllers
+   → controllers/user.controller.js
+   → handle logic (signup, login, etc.)
+
+8️⃣ Add Models
+   → models/User.model.js
+   → define schema and methods
+
+9️⃣ Add Middleware (optional)
+   → auth, errorHandler, multer, etc.
+
+🔟 Integrate Extra Features
+   → config/cloudinary.js (file upload)
+   → utils/jwtToken.js (authentication)
+   → bcrypt (password hashing)
+
+1️⃣1️⃣ Start Server
+   → index.js
+   → connectDB().then(() => app.listen(PORT))
+
+🚀 Backend Ready for Frontend Integration!
+*/
