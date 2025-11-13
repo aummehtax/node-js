@@ -1,3 +1,4 @@
+
 import {asyncHandler} from "../utils/asyncHandler.js"
 import {apiError} from "../utils/apiError.js"
 import {user} from "../models/user.model.js"
@@ -20,18 +21,26 @@ const registerUser = asyncHandler( async (req , res) => {
     throw new apiError(409, "user with email or username already exists")
    }
 
-   const avatarLocalPath = req.files?.avatar[0]?.path
-   const coverImageLocalPath = req.files?.coverImage[0]?.path
+   console.log(req.files);
    
+
+   const avatarLocalPath = req.files?.avatar?.[0]?.path;
+   const coverImageLocalPath = req.files?.coverImage?.[0]?.path
+
+    console.log("Avatar path:", avatarLocalPath); // Debug log
+    console.log("Cover image path:", coverImageLocalPath); // Debug log
+   
+
    if(!avatarLocalPath){
     throw new apiError(400 , "avatar is required")
    }
    
     const avatar = await uploadOnCloudinary(avatarLocalPath)
-    const coverImage = await uploadOnCloudinary(coverImageLocalPath)
+    const coverImage = coverImageLocalPath ? await uploadOnCloudinary(coverImageLocalPath) : null
+    
    
     if(!avatar){
-     throw new apiError(400 , "avatar is required")   
+     throw new apiError(400 , "avatar file is required")   
     }
 
     const userCreated = await user.create({
