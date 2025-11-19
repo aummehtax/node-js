@@ -1,4 +1,3 @@
-
 import {asyncHandler} from "../utils/asyncHandler.js"
 import {apiError} from "../utils/apiError.js"
 import {user} from "../models/user.model.js"
@@ -120,7 +119,7 @@ const loginUser = asyncHandler( async (req , res) => {
         secure: true // Only works on HTTPS
     }
 
-    res
+    return res
     .status(200)
     .cookie("accessToken", accessToken , options)
     .cookie("refreshToken", refreshToken , options)
@@ -192,7 +191,7 @@ const refreshAccessToken = asyncHandler ( async (req, res) => {
     
         const {accessToken , newRefreshToken} =  await generateRefreshTokenAndAccessToken(userExist._id)
     
-        res
+        return res
         .status(200)
         .cookie("accessToken" , accessToken , options)
         .cookie("refreshToken" , newRefreshToken , options)
@@ -209,4 +208,124 @@ const refreshAccessToken = asyncHandler ( async (req, res) => {
     }
 })
 
-export {registerUser, loginUser, logoutUser, refreshAccessToken}
+const changeCurrentPassword = asyncHandler ( async (req, res) => {
+   const {oldPassword, newPassword} = req.body
+
+   const UserExist = await user.findById(req.user?._id)
+   
+   const isPasswordCorrectOrNot = await UserExist.isPasswordCorrect(oldPassword)
+
+   if(!isPasswordCorrectOrNot){
+    throw apiError(400, "invalid old password")
+   }
+
+   UserExist.password = newPassword
+   await UserExist.save({validateBeforeSave: false}) //baki ke validation run nahi krna chahta
+
+   return res
+   .status(200)
+   .json(
+    apiResponse(
+        200,
+        {},
+        "password change successfully"  
+    )
+   )
+})
+
+const getCurrentUser = asyncHandler( async (req, res) => {
+    return res
+    .status(200)
+    .json(200, req.user, "current user fetched successfully")
+
+})
+
+const updateAccountDetails = asyncHandler( async (req, res) => {
+    const {fullname , email} = req.body
+
+    if(!fullname || !email){
+        throw new apiError(200, "all fields are required") 
+    }
+
+    const UserExist = await user.findByIdAndUpdate(req.user?._id ,{
+        $set: {
+            fullname: fullname,
+            email: email
+        }
+    },{new: true}).select("-password") //new isliye taki upd hone ke baad info return hoti he
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(
+            200,
+            {UserExist},
+            "account details update successfully"
+        )
+    )
+
+})
+
+const updateUserAvatar = asyncHandler( async (req, res) => {
+    const avatarImageLocalPath = req.file?.path
+
+    if(!avatarImageLocalPath){
+        throw new apiError(400 , "avatar file is missing")
+    }
+
+    const avatar = await uploadOnCloudinary(avatarImageLocalPath)
+
+    if(!avatar.url){
+        throw new apiError(400 , "error while (avatarImage) uploading to cloudinary")
+    }
+
+    const USER = user.findByIdAndUpdate(req.user?._id , {
+        $set: {
+            avatar: avatar.url
+        }
+    }, {new: true}).select("-password")
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(
+            200,
+            USER,
+            "avatar image updated successfully"
+        )
+    )
+
+})
+
+const updateUserCoverImage = asyncHandler( async (req, res) => {
+    const coverImageLocalPath = req.file?.path
+
+    if(!coverImageLocalPath){
+        throw new apiError(400 , "avatar file is missing")
+    }
+
+    const coverImage = await uploadOnCloudinary(coverImageLocalPath)
+
+    if(!coverImage.url){
+        throw new apiError(400 , "error while (coverImage) uploading to cloudinary")
+    }
+
+    const USER = user.findByIdAndUpdate(req.user?._id , {
+        $set: {
+            coverImage: coverImage.url
+        }
+    }, {new: true}).select("-password")
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(
+            200,
+            USER,
+            "coverImage updated successfully"
+        )
+    )
+
+})
+
+export {registerUser, loginUser, logoutUser, refreshAccessToken, changeCurrentPassword, getCurrentUser, updateAccountDetails, updateUserAvatar, updateUserCoverImage}
