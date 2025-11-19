@@ -4,10 +4,12 @@ import {apiError} from "../utils/apiError.js"
 import {user} from "../models/user.model.js"
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import {apiResponse} from "../utils/apiResponse.js"
+import jwt from "jsonwebtoken"
 
 const generateRefreshTokenAndAccessToken = async (userID) => {
     try {
-        const USER = await user.findOne(userID)
+        const USER = await user.findById(userID)
+
         const accessToken = USER.generateAccessToken()
         const refreshToken = USER.generateRefreshToken()
 
@@ -92,7 +94,7 @@ const loginUser = asyncHandler( async (req , res) => {
 
    const {username, email, password} = req.body
 
-   if(!username || !email){
+   if(!username && !email){
     throw new apiError(400 , "username or email is required");
    }
 
@@ -120,8 +122,8 @@ const loginUser = asyncHandler( async (req , res) => {
 
     res
     .status(200)
-    .cookie("accessToken : ", accessToken )
-    .cookie("refreshToken : ", refreshToken )
+    .cookie("accessToken", accessToken , options)
+    .cookie("refreshToken", refreshToken , options)
     .json(
         new apiResponse(
             200,
@@ -138,7 +140,73 @@ const loginUser = asyncHandler( async (req , res) => {
 })
 
 const logoutUser = asyncHandler( async (req , res) => {
-    
+    await user.findByIdAndUpdate(req.user._id, 
+        {
+            $set : {
+                refreshToken: undefined, // This removes the field entirely
+            }
+        },
+        {
+            new: true
+        }
+     )
+
+    const options = {
+        httpOnly: true,  // Prevents client-side JS access (XSS protection)
+        secure: true // Only works on HTTPS
+    }
+
+     return res
+     .status(200)
+     .clearCookie("accessToken" , options)
+     .clearCookie("refreshToken" , options)
+     .json(
+        new apiResponse(200, {}, "user logged out")
+     )
 })
 
-export {registerUser , loginUser}
+const refreshAccessToken = asyncHandler ( async (req, res) => {
+    const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken //for mobile app 
+
+    if(!incomingRefreshToken){
+       throw new apiError(400, "unauthorized request")
+    }
+
+    try {
+        const decodedToken = jwt.verify(incomingRefreshToken , process.env.REFRESH_TOKEN_SECRET)
+    
+        const userExist = await user.findById(decodedToken?._id)
+    
+        if(!userExist){
+           throw new apiError(400, "invalid user token")
+        }
+    
+        if(incomingRefreshToken !== userExist.refreshToken){
+           throw new apiError(400, "refresh token is expired or used")
+        }
+    
+        const options = {
+            httpOnly: true,
+            secure: true
+        }
+    
+        const {accessToken , newRefreshToken} =  await generateRefreshTokenAndAccessToken(userExist._id)
+    
+        res
+        .status(200)
+        .cookie("accessToken" , accessToken , options)
+        .cookie("refreshToken" , newRefreshToken , options)
+        .json(
+            new apiResponse(
+                200,
+                {accessToken , refreshToken: newRefreshToken},
+                "Access token refreshed"
+                
+            )
+        )
+    } catch (error) {
+        throw new apiError(400, error?.message || "invalid refresh token")
+    }
+})
+
+export {registerUser, loginUser, logoutUser, refreshAccessToken}
