@@ -143,8 +143,8 @@ const loginUser = asyncHandler( async (req , res) => {
 const logoutUser = asyncHandler( async (req , res) => {
     await user.findByIdAndUpdate(req.user._id, 
         {
-            $set : {
-                refreshToken: undefined, // This removes the field entirely
+            $unset : {
+                refreshToken: 1, // This removes the field from document
             }
         },
         {
@@ -218,7 +218,7 @@ const changeCurrentPassword = asyncHandler ( async (req, res) => {
    const isPasswordCorrectOrNot = await UserExist.isPasswordCorrect(oldPassword)
 
    if(!isPasswordCorrectOrNot){
-    throw apiError(400, "invalid old password")
+    throw new apiError(400, "invalid old password")
    }
 
    UserExist.password = newPassword
@@ -227,7 +227,7 @@ const changeCurrentPassword = asyncHandler ( async (req, res) => {
    return res
    .status(200)
    .json(
-    apiResponse(
+    new apiResponse(
         200,
         {},
         "password change successfully"  
@@ -238,7 +238,11 @@ const changeCurrentPassword = asyncHandler ( async (req, res) => {
 const getCurrentUser = asyncHandler( async (req, res) => {
     return res
     .status(200)
-    .json(200, req.user, "current user fetched successfully")
+    .json(
+        new apiResponse(
+            200, {}, "current user fetched successfully"
+        )
+    )
 
 })
 
